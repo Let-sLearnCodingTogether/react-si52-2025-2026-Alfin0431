@@ -44,7 +44,7 @@ function Movies(){
             <NavLink to="/add-movie" className="btn btn-primary">Add Movie</NavLink>
         </div>
         <div>
-            <Table>
+            <Table striped bordered hover>
                 <thead>
                     <th>No</th>
                     <th>Judul</th>
@@ -53,6 +53,11 @@ function Movies(){
                     <th>Aksi</th>
                 </thead>
                 <tbody>
+                    {
+                        loading && <tr>
+                            <td colSpan={5}>Loading.....</td>
+                        </tr>
+                    }
                     {
                         Movies.length > 0 && Movies.map((movie, index) => {
                             return <tr key={movie._id}>
