@@ -3,15 +3,13 @@ import { Button, Form } from "react-bootstrap"
 import ApiClient from "../../../utils/ApiClient"
 import { NavLink } from "react-router"
 
-interface SignUpForm{
-    username : string,
+interface SignInForm{
     email : string,
     password : string
 }
 
-function SignUp() {
-    const [form, setForm] = useState<SignUpForm>({
-        username : "",
+function SignIn () {
+    const [form, setForm] = useState<SignInForm>({
         email : "",
         password : ""
     })
@@ -30,6 +28,7 @@ function SignUp() {
 
         try {
             const response = await ApiClient.post("/signup", form)
+
             console.log(response);
         } catch (error) {
             console.log(error);
@@ -37,23 +36,12 @@ function SignUp() {
     }
 
     return <div className="container mx-auto">
-        <h1>Sign Up</h1>
-        <Form onSubmit={onSubmit}>
+        <h1>Sign In</h1>
             <Form>
-                <Form.Group className ="mb-3" controlId="formUsername">
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        value={form.username}
-                        onChange={onHandleChange}
-                        name ="username" 
-                        type="text"
-                        placeholder="Username"/>
-                </Form.Group>
                 <Form.Group  className ="mb-3" controlId="formEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         value={form.email}
-                        onChange={onHandleChange}
                         name ="email" 
                         type="text"
                         placeholder="Email"/>
@@ -67,13 +55,10 @@ function SignUp() {
                         type="password"
                         placeholder="Password"/>
                 </Form.Group>
-
-                <Button type="submit" variant="primary">SignUp</Button>
-                <NavLink to="/signin"> Sign In </NavLink>
+                <Button type="submit" variant="primary">SignIn</Button>
+                <NavLink to="/signup"> Sign Up </NavLink>
             </Form> 
-        </Form> 
-        </div>
-    
+    </div>
 }
 
-export default SignUp
+export default SignIn
