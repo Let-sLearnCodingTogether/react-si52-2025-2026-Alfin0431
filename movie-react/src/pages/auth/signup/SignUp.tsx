@@ -39,7 +39,7 @@ function SignUp() {
     return <div className="container mx-auto">
         <h1>Sign Up</h1>
         <Form onSubmit={onSubmit}>
-            <Form>
+            
                 <Form.Group className ="mb-3" controlId="formUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -68,9 +68,10 @@ function SignUp() {
                         placeholder="Password"/>
                 </Form.Group>
 
-                <Button type="submit" variant="primary">SignUp</Button>
+                <Button type="submit" variant="primary">
+                </Button>
                 <NavLink to="/signin"> Sign In </NavLink>
-            </Form> 
+            
         </Form> 
         </div>
     

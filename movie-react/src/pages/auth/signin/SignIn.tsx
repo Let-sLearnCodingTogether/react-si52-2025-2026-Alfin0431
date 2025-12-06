@@ -1,7 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from "react"
 import { Button, Form } from "react-bootstrap"
 import ApiClient from "../../../utils/ApiClient"
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 
 interface SignInForm{
     email : string,
@@ -9,10 +9,12 @@ interface SignInForm{
 }
 
 function SignIn () {
+    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
     const [form, setForm] = useState<SignInForm>({
         email : "",
         password : ""
-    })
+    }) 
 
     const onHandleChange = (event : ChangeEvent<HTMLInputElement>) =>{
         const {name, value} = event.target
@@ -25,23 +27,31 @@ function SignIn () {
 
     const onSubmit = async (event : FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-
+        setIsLoading (true)
         try {
             const response = await ApiClient.post("/signup", form)
 
             console.log(response);
+            if (response.status === 200){
+                navigate ("/movies",{
+                    replace : true
+                })
+            }
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsLoading(false)
         }
     }
 
     return <div className="container mx-auto">
         <h1>Sign In</h1>
-            <Form>
+            <Form onSubmit={onSubmit}>
                 <Form.Group  className ="mb-3" controlId="formEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         value={form.email}
+                        onChange={onHandleChange}
                         name ="email" 
                         type="text"
                         placeholder="Email"/>
@@ -55,7 +65,9 @@ function SignIn () {
                         type="password"
                         placeholder="Password"/>
                 </Form.Group>
-                <Button type="submit" variant="primary">SignIn</Button>
+                <Button type="submit" variant="primary">
+                    {isLoading ? "Loading..." : "Sign In"}
+                </Button>
                 <NavLink to="/signup"> Sign Up </NavLink>
             </Form> 
     </div>
