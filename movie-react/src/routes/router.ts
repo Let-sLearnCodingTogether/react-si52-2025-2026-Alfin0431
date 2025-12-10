@@ -8,7 +8,7 @@ const router = createBrowserRouter([
                 path : "signUp",
                 lazy : {
                     Component : async () => {
-                        const component = await import("../pages/auth/signup/SignUp.tsx")
+                        const component = await import("../pages/movies/auth/signup/SignUp.tsx")
                         return component.default
                     }
                 }
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
                 path : "signIn",
                 lazy : {
                     Component : async () => {
-                        const component = await import("../pages/auth/signin/SignIn.tsx")
+                        const component = await import("../pages/movies/auth/signin/SignIn.tsx")
                         return component.default
                     }
                 }
@@ -25,13 +25,14 @@ const router = createBrowserRouter([
         ]
     },
 {
+    
     path : "/movies", //alamat dari sebuah page
     children : [
         {
             index : true,
             lazy : {
                 Component : async() => {
-                    const component = await import("../pages/movies/Movies.tsx")
+                    const component = await import("../pages/movies/Movie.tsx")
                     return component.default
                 }
                 
@@ -47,7 +48,18 @@ const router = createBrowserRouter([
             }
         }
     ]
+},
+{
+    path : "edit-movie/:id",
+    lazy : {
+        Component : async () => {
+            const component = await import ("../pages/movies/EditMovie.tsx")
+
+            return component.default
+        }
+    }
 }
+
 ])
 
 export default router 

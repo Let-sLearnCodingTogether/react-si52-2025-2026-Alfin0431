@@ -10,7 +10,7 @@ interface FormMovie {
     sutradara: string
 }
 
-function AddMovie() {
+function EditMovie() {
     const [form, setForm] =  useState<FormMovie>({
         judul: "",
         tahunRilis: "",
@@ -39,7 +39,7 @@ function AddMovie() {
 
     return <div>
         <div>
-            <h2>Add Movie</h2>
+            <h2>Edit Movie</h2>
             <NavLink to="/movie">Movie Page</NavLink>
         </div>
             <Form onSubmit={handleSubmit}>
@@ -82,4 +82,4 @@ function AddMovie() {
     </div>
 }
 
-export default AddMovie;
+export default EditMovie;
